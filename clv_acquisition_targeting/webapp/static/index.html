@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSR — Customer value & lapse risk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Customer lifetime value (internal tool)</h1>
+      <p>
+        Enter what you know from the account. The server runs the same churn-adjusted CLV logic as the
+        training notebooks, and streams each calculation step so you can explain the estimate on a call.
+      </p>
+    </header>
+
+    <main class="layout">
+      <section class="card" aria-labelledby="form-heading">
+        <h2 id="form-heading">Account inputs</h2>
+        <form id="csr-form">
+          <div class="form-grid">
+            <label>
+              <span class="label-title">Customer age</span>
+              <input id="age" type="number" min="18" max="100" value="45" required />
+              <span class="hint">Years</span>
+            </label>
+            <label>
+              <span class="label-title">Months on file</span>
+              <input id="tenure_months" type="number" min="1" max="600" value="24" required />
+              <span class="hint">Time as a customer</span>
+            </label>
+            <label>
+              <span class="label-title">Service / billing events</span>
+              <input id="num_orders" type="number" min="1" max="400" value="10" required />
+              <span class="hint">Claims, endorsements, payments counted</span>
+            </label>
+            <label>
+              <span class="label-title">Lifetime payments (premiums)</span>
+              <input id="total_spend" type="number" min="0" step="0.01" value="9600" required />
+              <span class="hint">Total collected, same currency as CLV output</span>
+            </label>
+            <label>
+              <span class="label-title">Typical payment size</span>
+              <input id="avg_order_value" type="number" min="0" step="0.01" value="320" required />
+              <span class="hint">Average invoice or installment</span>
+            </label>
+            <label>
+              <span class="label-title">Days since last touchpoint</span>
+              <input id="days_since_last_order" type="number" min="0" max="730" value="30" required />
+            </label>
+            <label>
+              <span class="label-title">Messages opened (30 days)</span>
+              <input id="email_opens_30d" type="number" min="0" max="60" value="4" required />
+            </label>
+            <label>
+              <span class="label-title">Digital sessions (30 days)</span>
+              <input id="app_sessions_30d" type="number" min="0" max="60" value="3" required />
+            </label>
+            <label style="grid-column: 1 / -1">
+              <span class="label-title">Region</span>
+              <select id="region" required>
+                <option value="NE">Northeast (NE)</option>
+                <option value="SE">Southeast (SE)</option>
+                <option value="MW" selected>Midwest (MW)</option>
+                <option value="W">West (W)</option>
+                <option value="S">South central (S)</option>
+              </select>
+              <span class="hint">Must match training buckets</span>
+            </label>
+          </div>
+          <div class="actions">
+            <button type="submit" class="primary">Run estimate &amp; show math</button>
+            <button type="button" class="ghost" id="btn-fill-demo">Fill example</button>
+            <span id="status" class="status-pill">Ready</span>
+          </div>
+        </form>
+      </section>
+
+      <section class="card" aria-labelledby="log-heading">
+        <div class="log-header">
+          <h2 id="log-heading">Calculation trace</h2>
+        </div>
+        <p class="hint" style="margin: 0 0 0.75rem">
+          Steps appear as the backend finishes each stage (inputs → risk model → historical value →
+          discounted future months → total CLV).
+        </p>
+        <div id="calc-log" role="log" aria-live="polite"></div>
+        <div id="result-panel"></div>
+      </section>
+    </main>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

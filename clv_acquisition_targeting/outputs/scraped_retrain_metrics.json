@@ -1,0 +1,15 @@
+{
+  "training_csv": "data/customers_augmented_public_health.csv",
+  "n_total_rows": 8000,
+  "n_train": 5600,
+  "n_val": 1200,
+  "n_test": 1200,
+  "test_accuracy": 0.5316666666666666,
+  "test_roc_auc": 0.5579501609726694,
+  "test_pr_auc": 0.5527610758197583,
+  "figures": [
+    "scraped_augment_confusion_matrix.png",
+    "scraped_augment_roc.png",
+    "scraped_augment_pr.png"
+  ]
+}

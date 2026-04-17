@@ -1,0 +1,20 @@
+{
+  "churn_metrics": {
+    "roc_auc": 0.5579501609726694,
+    "average_precision": 0.5527610758197583
+  },
+  "targeting": {
+    "baseline_conversion": 0.5201065836165286,
+    "targeted_conversion": 0.5385863079781025,
+    "random_mean_conversion": 0.5197308679188108,
+    "random_std_conversion": 0.011938027054626236,
+    "incremental_lift_vs_random_pct": 3.627923839658709,
+    "top_fraction": 0.2,
+    "acquisition_pool_size": 1200
+  },
+  "clv_summary": {
+    "mean": 795.8619533131225,
+    "p50": 648.3784183945633,
+    "p90": 1608.1978330622971
+  }
+}

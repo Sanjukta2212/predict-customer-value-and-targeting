@@ -1,0 +1,17 @@
+{
+  "sources": [
+    {
+      "name": "FDIC failed bank list",
+      "url": "https://www.fdic.gov/resources/resolutions/bank-failures/failed-bank-list/",
+      "output": "data/scraped/fdic_failed_banks_list.csv"
+    },
+    {
+      "name": "Wikipedia \u2014 health insurance coverage in the United States",
+      "url": "https://en.wikipedia.org/wiki/Health_insurance_coverage_in_the_United_States",
+      "outputs": [
+        "data/scraped/wikipedia_us_uninsured_by_year.csv",
+        "data/scraped/wikipedia_us_insurance_rates_by_census_division_wide.csv"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+# Reproducible defaults for the CLV + churn acquisition pipeline.
+# Paths are relative to the project root unless absolute.
+
+project:
+  random_seed: 42
+  output_dir: outputs
+
+data:
+  # Churn/CLV training uses this CSV (includes public_uninsured_rate_proxy from scraped Wikipedia state table).
+  customer_training_csv: data/customers_augmented_public_health.csv
+  # Row count is fixed in data/customers.csv (regenerate CSV if you change this).
+  n_customers: 8000
+  churn_noise: 0.35
+  train_fraction: 0.7
+  val_fraction: 0.15
+  # Remainder is test
+
+churn_model:
+  model_type: gradient_boosting  # gradient_boosting | logistic | random_forest | xgboost
+  n_estimators: 120
+  max_depth: 4
+  learning_rate: 0.08
+  min_samples_leaf: 20
+  class_weight: balanced
+
+clv:
+  margin_rate: 0.25
+  discount_monthly: 0.002
+  max_horizon_months: 60
+  min_churn_prob: 0.001
+  max_churn_prob: 0.999
+
+targeting:
+  top_fraction: 0.2
+  n_random_trials: 200
+  acquisition_pool_size: 3000
